@@ -18,15 +18,17 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name="korisnik")
+@JsonPropertyOrder({"userId", "name", "surname", "address", "jmbg", "phoneNumber"})
 public class UserEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="korisnik_id")
+	@Column(name="id")
 	private Integer userId;
 	
 	@NotEmpty(message="Morate uneti ime!")
@@ -39,12 +41,19 @@ public class UserEntity {
 	
 	@NotEmpty(message="Morate uneti jmbg!")
 	@Column(name="jmbg")
-	@Size(min=13, max=13)
+	@Size(min=13, max=13, message="Neispravan podatak. Jmbg mora imati 13 cifara.")
 	private String jmbg;
 	
 	@NotEmpty(message="Morate uneti adresu!")
 	@Column(name="adresa")
 	private String address;
+	
+	@NotEmpty(message="Morate uneti mesto boravka!")
+	@Column(name="mesto_boravka")
+	private String city;
+	
+	@Column
+	private String email;
 	
 	@Column(name="broj_telefona")
 	private String phoneNumber;

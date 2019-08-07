@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -25,15 +24,11 @@ public class RoleEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="uloga_id")
+	@Column(name="id")
 	private Integer roleId;
 	
 	@Column(name="naziv_uloge")
 	private ERoleName roleName;
-	
-	@Transient
-	@JsonIgnore
-	private Boolean isActive;
 	
 	@Version
 	private Integer version;
