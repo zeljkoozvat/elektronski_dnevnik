@@ -24,10 +24,54 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class YearOfStudy {
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="years", fetch=FetchType.LAZY, cascade= {CascadeType.REFRESH})
+	@OneToMany(mappedBy="year", fetch=FetchType.LAZY, cascade= {CascadeType.REFRESH})
 	@JsonBackReference
 	private List<ClassEntity> classes=new ArrayList<>();
 	
+	public YearOfStudy() {
+		super();
+	}
+
+	public YearOfStudy(List<ClassEntity> classes, List<SubjectEntity> subjects, Integer yearOfStudyId, Integer year) {
+		super();
+		this.classes = classes;
+		this.subjects = subjects;
+		this.yearOfStudyId = yearOfStudyId;
+		this.year = year;
+	}
+
+	public List<ClassEntity> getClasses() {
+		return classes;
+	}
+
+	public void setClasses(List<ClassEntity> classes) {
+		this.classes = classes;
+	}
+
+	public List<SubjectEntity> getSubjects() {
+		return subjects;
+	}
+
+	public void setSubjects(List<SubjectEntity> subjects) {
+		this.subjects = subjects;
+	}
+
+	public Integer getYearOfStudyId() {
+		return yearOfStudyId;
+	}
+
+	public void setYearOfStudyId(Integer yearOfStudyId) {
+		this.yearOfStudyId = yearOfStudyId;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
 	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.REFRESH)
 	@JoinTable(name="Subject_Year" , joinColumns= {@JoinColumn(name="yearOfStudyId", 
 		nullable=false, updatable=false)},

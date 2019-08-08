@@ -37,4 +37,41 @@ public class RoleEntity {
 	@OneToMany(mappedBy="role", fetch = FetchType.LAZY, cascade= {CascadeType.REFRESH} )
 	@JsonBackReference
 	private List<UserEntity> users = new ArrayList<>();
+	
+	public Integer getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+
+	public ERoleName getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(ERoleName roleName) {
+		this.roleName = roleName;
+	}
+
+	public List<UserEntity> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<UserEntity> users) {
+		this.users = users;
+	}
+
+	public RoleEntity() {
+		super();
+	}
+
+	public RoleEntity(Integer roleId, ERoleName roleName, List<UserEntity> users) {
+		super();
+		this.roleId = roleId;
+		this.roleName = roleName;
+		this.users = users;
+	}
+
+	
 }
