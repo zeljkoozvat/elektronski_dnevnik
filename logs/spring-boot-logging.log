@@ -448,3 +448,4 @@ Verify the connector's configuration, identify and stop any process that's liste
 2019-08-09 18:52:34.705  INFO 19360 --- [http-nio-8080-exec-3] o.s.w.s.DispatcherServlet                : Completed initialization in 10 ms
 2019-08-09 18:52:35.013 ERROR 19360 --- [http-nio-8080-exec-3] c.i.e.c.AuthenticationEntryPoint         : Unauthorized attempt
 2019-08-09 18:52:57.883 ERROR 19360 --- [http-nio-8080-exec-2] c.i.e.c.AuthenticationEntryPoint         : Unauthorized attempt
+2019-08-09 19:22:57.496 ERROR 19360 --- [http-nio-8080-exec-6] c.i.e.c.AuthenticationEntryPoint         : Unauthorized attempt
