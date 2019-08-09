@@ -66,7 +66,7 @@ public class ClassEntity {
 	@JsonIgnore
 	@Column
 	@NotNull
-	private String deleted;
+	private Boolean deleted;
 
 	@Transient
 	@Version
@@ -120,13 +120,21 @@ public class ClassEntity {
 		this.className = className;
 	}
 
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	public ClassEntity() {
 		super();
 	}
 
 	public ClassEntity(YearOfStudy year, List<StudentEntity> students, List<TeachesEntity> teacherClassSubjects,
 			List<GradeEntity> grades, Integer classId, @Size(min = 2, max = 4) String className,
-			@NotNull String deleted) {
+			@NotNull Boolean deleted) {
 		super();
 		this.year = year;
 		this.students = students;
@@ -137,12 +145,5 @@ public class ClassEntity {
 		this.deleted = deleted;
 	}
 
-	public String getDeleted() {
-		return deleted;
-	}
-
-	public void setDeleted(String deleted) {
-		this.deleted = deleted;
-	}
 	
 }

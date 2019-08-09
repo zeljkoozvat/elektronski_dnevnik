@@ -73,34 +73,11 @@ public class SubjectEntity {
 	@JsonIgnore
 	@Column
 	@NotNull
-	private String deleted;
+	private Boolean deleted;
 	
 	@Transient
 	@Version
 	private Integer version;
-	
-	public SubjectEntity(List<YearOfStudy> years, List<TeacherEntity> teachers,
-			List<TeachesEntity> teacherClassSubjects, Integer subjectId,
-			@NotEmpty(message = "Unesite naziv predmeta") String subjectName, @NotEmpty Integer weeklyTeachingHours,
-			@NotEmpty Integer yearlyTeachingHours, @NotNull String deleted) {
-		super();
-		this.years = years;
-		this.teachers = teachers;
-		this.teacherClassSubjects = teacherClassSubjects;
-		this.subjectId = subjectId;
-		this.subjectName = subjectName;
-		this.weeklyTeachingHours = weeklyTeachingHours;
-		this.yearlyTeachingHours = yearlyTeachingHours;
-		this.deleted = deleted;
-	}
-
-	public String getDeleted() {
-		return deleted;
-	}
-
-	public void setDeleted(String deleted) {
-		this.deleted = deleted;
-	}
 	
 	public List<YearOfStudy> getYears() {
 		return years;
@@ -156,6 +133,32 @@ public class SubjectEntity {
 
 	public void setYearlyTeachingHours(Integer yearlyTeachingHours) {
 		this.yearlyTeachingHours = yearlyTeachingHours;
+	}
+	
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+	
+
+	public SubjectEntity(List<YearOfStudy> years, List<TeacherEntity> teachers,
+			List<TeachesEntity> teacherClassSubjects, Integer subjectId,
+			@NotEmpty(message = "Unesite naziv predmeta") String subjectName,
+			@NotEmpty(message = "Unesite nedeljni fond casova") Integer weeklyTeachingHours,
+			@NotEmpty(message = "Unesite godisnji fond casova") Integer yearlyTeachingHours, @NotNull Boolean deleted) {
+		super();
+		this.years = years;
+		this.teachers = teachers;
+		this.teacherClassSubjects = teacherClassSubjects;
+		this.subjectId = subjectId;
+		this.subjectName = subjectName;
+		this.weeklyTeachingHours = weeklyTeachingHours;
+		this.yearlyTeachingHours = yearlyTeachingHours;
+		this.deleted = deleted;
 	}
 
 	public SubjectEntity() {

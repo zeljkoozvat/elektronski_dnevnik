@@ -66,14 +66,9 @@ public class StudentEntity extends UserEntity{
 		this.clas = clas;
 	}
 
-	public StudentEntity(Integer userId, @NotEmpty(message = "Morate uneti ime!") String name,
-			@NotEmpty(message = "Morate uneti prezime!") String surname,
-			@NotEmpty(message = "Morate uneti jmbg!") @Size(min = 13, max = 13, message = "Neispravan podatak. Jmbg mora imati 13 cifara.") String jmbg,
-			@NotEmpty(message = "Morate uneti adresu!") String address,
-			@NotEmpty(message = "Morate uneti mesto boravka!") String city,
-			@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "Email is not valid.") String email,
-			String phoneNumber, @NotNull String deleted, RoleEntity role, UserAccount account) {
-		super(userId, name, surname, jmbg, address, city, email, phoneNumber, deleted, role, account);
+	public StudentEntity() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public StudentEntity(Integer userId, @NotEmpty(message = "Morate uneti ime!") String name,
@@ -82,11 +77,8 @@ public class StudentEntity extends UserEntity{
 			@NotEmpty(message = "Morate uneti adresu!") String address,
 			@NotEmpty(message = "Morate uneti mesto boravka!") String city,
 			@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "Email is not valid.") String email,
-			String phoneNumber, @NotNull String deleted, RoleEntity role, UserAccount account,
-			List<ParentEntity> parents, List<GradeEntity> grades, ClassEntity clas) {
-		super(userId, name, surname, jmbg, address, city, email, phoneNumber, deleted, role, account);
-		this.parents = parents;
-		this.grades = grades;
-		this.clas = clas;
+			String phoneNumber, @NotNull String username, String password, @NotNull Boolean deleted, RoleEntity role) {
+		super(userId, name, surname, jmbg, address, city, email, phoneNumber, username, password, deleted, role);
+		// TODO Auto-generated constructor stub
 	}
 }

@@ -11,7 +11,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
@@ -19,11 +18,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -72,10 +68,18 @@ public class UserEntity {
 	@Column(name="broj_telefona")
 	private String phoneNumber;
 	
+	@NotNull
+	@Column(name="korisnicko_ime", unique=true)
+	private String username;
+	
+	@Column(name="password", nullable=false, unique=true)
+	@JsonIgnore
+	private String password;
+	
 	@JsonIgnore
 	@Column
 	@NotNull
-	private String deleted;
+	private Boolean deleted;
 	
 	@Version
 	@Transient
@@ -85,10 +89,10 @@ public class UserEntity {
 	@JoinColumn(name="role")
 	@JsonManagedReference
 	private RoleEntity role;
-	
-	@JsonBackReference
-	@OneToOne(mappedBy="user", fetch=FetchType.LAZY, cascade=CascadeType.REFRESH)
-	private UserAccount account;
+
+	public UserEntity() {
+		super();
+	}
 
 	public UserEntity(Integer userId, @NotEmpty(message = "Morate uneti ime!") String name,
 			@NotEmpty(message = "Morate uneti prezime!") String surname,
@@ -96,7 +100,7 @@ public class UserEntity {
 			@NotEmpty(message = "Morate uneti adresu!") String address,
 			@NotEmpty(message = "Morate uneti mesto boravka!") String city,
 			@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "Email is not valid.") String email,
-			String phoneNumber, @NotNull String deleted, RoleEntity role, UserAccount account) {
+			String phoneNumber, @NotNull String username, String password, @NotNull Boolean deleted, RoleEntity role) {
 		super();
 		this.userId = userId;
 		this.name = name;
@@ -106,14 +110,13 @@ public class UserEntity {
 		this.city = city;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
+		this.username = username;
+		this.password = password;
 		this.deleted = deleted;
 		this.role = role;
-		this.account = account;
 	}
 
-	public UserEntity() {
-		super();
-	}
+
 
 	public Integer getUserId() {
 		return userId;
@@ -179,11 +182,27 @@ public class UserEntity {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getDeleted() {
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Boolean getDeleted() {
 		return deleted;
 	}
 
-	public void setDeleted(String deleted) {
+	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
 	}
 
@@ -193,14 +212,6 @@ public class UserEntity {
 
 	public void setRole(RoleEntity role) {
 		this.role = role;
-	}
-
-	public UserAccount getAccount() {
-		return account;
-	}
-
-	public void setAccount(UserAccount account) {
-		this.account = account;
 	}
 	
 }

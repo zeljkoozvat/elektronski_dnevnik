@@ -22,9 +22,10 @@ public class AdminEntity extends UserEntity{
 			@NotEmpty(message = "Morate uneti adresu!") String address,
 			@NotEmpty(message = "Morate uneti mesto boravka!") String city,
 			@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "Email is not valid.") String email,
-			String phoneNumber, @NotNull String deleted, RoleEntity role, UserAccount account) {
-		super(userId, name, surname, jmbg, address, city, email, phoneNumber, deleted, role, account);
+			String phoneNumber, @NotNull String username, String password, @NotNull Boolean deleted, RoleEntity role) {
+		super(userId, name, surname, jmbg, address, city, email, phoneNumber, username, password, deleted, role);
 		// TODO Auto-generated constructor stub
 	}
 
+	
 }

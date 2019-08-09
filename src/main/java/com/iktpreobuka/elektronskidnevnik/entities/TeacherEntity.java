@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -45,22 +44,10 @@ public class TeacherEntity extends UserEntity{
 	@JsonBackReference
 	private List<TeachesEntity> teacherClassSubjects=new ArrayList<>();
 	
-	@JsonIgnore
-	@Column
-	@NotNull
-	private String deleted;
-	
 	@Version
 	@Transient
 	private Integer version;
 
-	public String getDeleted() {
-		return deleted;
-	}
-
-	public void setDeleted(String deleted) {
-		this.deleted = deleted;
-	}
 
 	public List<SubjectEntity> getSubjects() {
 		return subjects;
@@ -78,14 +65,9 @@ public class TeacherEntity extends UserEntity{
 		this.teacherClassSubjects = teacherClassSubjects;
 	}
 
-	public TeacherEntity(Integer userId, @NotEmpty(message = "Morate uneti ime!") String name,
-			@NotEmpty(message = "Morate uneti prezime!") String surname,
-			@NotEmpty(message = "Morate uneti jmbg!") @Size(min = 13, max = 13, message = "Neispravan podatak. Jmbg mora imati 13 cifara.") String jmbg,
-			@NotEmpty(message = "Morate uneti adresu!") String address,
-			@NotEmpty(message = "Morate uneti mesto boravka!") String city,
-			@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "Email is not valid.") String email,
-			String phoneNumber, @NotNull String deleted, RoleEntity role, UserAccount account) {
-		super(userId, name, surname, jmbg, address, city, email, phoneNumber, deleted, role, account);
+	public TeacherEntity() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public TeacherEntity(Integer userId, @NotEmpty(message = "Morate uneti ime!") String name,
@@ -94,13 +76,10 @@ public class TeacherEntity extends UserEntity{
 			@NotEmpty(message = "Morate uneti adresu!") String address,
 			@NotEmpty(message = "Morate uneti mesto boravka!") String city,
 			@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "Email is not valid.") String email,
-			String phoneNumber, @NotNull String deleted, RoleEntity role, UserAccount account,
-			List<SubjectEntity> subjects, List<TeachesEntity> teacherClassSubjects, @NotNull String deleted2) {
-		super(userId, name, surname, jmbg, address, city, email, phoneNumber, deleted, role, account);
-		this.subjects = subjects;
-		this.teacherClassSubjects = teacherClassSubjects;
-		deleted = deleted2;
+			String phoneNumber, @NotNull String username, String password, @NotNull Boolean deleted, RoleEntity role) {
+		super(userId, name, surname, jmbg, address, city, email, phoneNumber, username, password, deleted, role);
+		// TODO Auto-generated constructor stub
 	}
-
+	
 	
 }
